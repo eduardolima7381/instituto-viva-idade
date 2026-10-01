@@ -39,3 +39,4 @@ O fluxo de trabalho segue o GitFlow: novas funcionalidades em `feature/`, integr
 ## Autor
 
 Carlos Eduardo Lima
+GitHub: https://github.com/eduardolima7381
