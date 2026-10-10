@@ -2,9 +2,20 @@ import { templates } from './templates.js';
 
 const app = document.getElementById('app');
 
+function atualizarMenu(rota) {
+    document.querySelectorAll('header nav > ul > li > a[data-link]').forEach((link) => {
+        if (link.dataset.link === rota) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
+        }
+    });
+}
+
 function renderizar(rota) {
     const template = templates[rota] || templates.naoEncontrada;
     app.innerHTML = template();
+    atualizarMenu(rota);
 }
 
 function rotaAtual() {

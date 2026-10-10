@@ -7,6 +7,8 @@ export function mostrarErro(campo, texto) {
         aviso = document.createElement('span');
         aviso.id = `erro-${campo.id}`;
         aviso.className = 'mensagem-erro';
+        aviso.setAttribute('role', 'alert');
+        campo.after(aviso);
         campo.after(aviso);
         campo.setAttribute('aria-describedby', aviso.id);
     }
