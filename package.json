@@ -1,0 +1,26 @@
+{
+  "name": "instituto-viva-idade",
+  "version": "1.0.0",
+  "description": "Site institucional de uma ONG fictícia que cuida de idosos, desenvolvido como projeto prático do curso de Análise e Desenvolvimento de Sistemas (Cruzeiro do Sul).",
+  "main": "index.js",
+  "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardolima7381/instituto-viva-idade.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eduardolima7381/instituto-viva-idade/issues"
+  },
+  "homepage": "https://github.com/eduardolima7381/instituto-viva-idade#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
