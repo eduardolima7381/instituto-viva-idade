@@ -6,12 +6,22 @@
 /*cores segundarias (acoes) */
 --cor-secundaria: #e8a33d;
 --cor-secundaria-escura: #c4801f;
+--cor-secundaria-clara: #f5c96a;
 /*neutras*/
 --cor-neutra-900: #1a1a1a;
 --cor-neutra-700: #4d4d4d;
 --cor-neutra-300: #d9d9d9;
 --cor-neutra-100: #f7f5f2;
 --cor-branco: #ffffff;
+/* papeis (funcao da cor) */
+--cor-fundo: var(--cor-branco);
+--cor-texto: var(--cor-neutra-900);
+--cor-texto-suave: var(--cor-neutra-700);
+--cor-titulo: var(--cor-primaria-escura);
+--cor-superficie: var(--cor-neutra-100);
+--cor-foco: var(--cor-primaria-escura);
+--cor-erro-texto: var(--cor-erro);
+--cor-fundo-modal: var(--cor-branco);
 --cor-erro : #c0392b;
 --cor-sucesso-fundo: #e6f4ec;
 --cor-aviso-fundo: #fdf3e0;
@@ -36,20 +46,45 @@
 --container-max: 1200px;
 --grid-gap: var(--espaco-3);
 }
-
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cor-fundo: #1a1a1a;
+        --cor-texto: #f7f5f2;
+        --cor-texto-suave: #d9d9d9;
+        --cor-titulo: #6fbf95;
+        --cor-superficie: #2b2b2b;
+        --cor-foco: var(--cor-primaria-clara);
+        --cor-erro-texto: #e57368;
+        --cor-fundo-modal: #2b2b2b;
+    }
+}
 *,*::before, *::after { box-sizing: border-box;}
 body{
     margin: 0;
     font-family: var(--fonte-base);
-    color: var(--cor-neutra-900);
-    background: var(--cor-branco);
+    color: var(--cor-texto);
+    background: var(--cor-fundo);
     line-height: 1.6;
 }
 h1, h2, h3{
     margin: 0 0 var(--espaco-2);line-height: 1.25;
 }
-p{ color: var(--cor-neutra-700); }
+p{ color: var(--cor-texto-suave); }
 a{ color: inherit; }
+/* ===== Acessibilidade: link para pular o menu ===== */
+.pular-link {
+    position: absolute;
+    top: -100px;
+    left: var(--espaco-2);
+    padding: var(--espaco-1) var(--espaco-2);
+    background: var(--cor-secundaria);
+    color: var(--cor-neutra-900);
+    font-weight: 600;
+    border-radius: 6px;
+    z-index: 50;
+}
+.pular-link:focus { top: var(--espaco-1); }
+#app:focus { outline: none; }
 /* cabecalho e navegacao*/
 header{
     background: var(--cor-primaria-escura);
@@ -81,10 +116,21 @@ header nav a {
     font-weight: 500;
     color: var(--cor-branco);
 }
- header nav a:hover,
+  header nav a:hover,
  header nav a:focus-visible{
-    color: var(--cor-secundaria);
+    color: var(--cor-secundaria-clara);
   }
+  a:focus-visible {
+    outline: 3px solid var(--cor-primaria-escura);
+    outline-offset: 3px;
+}
+header nav a:focus-visible {
+    outline-color: var(--cor-foco);
+}
+header nav a[aria-current="page"] {
+    font-weight: 700;
+    text-decoration: underline;
+}
   .tem-submenu { position: relative; }
 .submenu {
     display: none;
@@ -135,7 +181,7 @@ header nav a {
 
 section h2 {
     font-size: var(--texto-lg);
-    color: var(--cor-primaria-escura);
+    color: var(--cor-titulo);
     margin-bottom: var(--espaco-3);
 }
 /*===== Seção "Sobre" (index.html) - Grid =====*/
@@ -161,12 +207,12 @@ section h2 {
 
 address {
     font-style: normal;
-    background: var(--cor-neutra-100);
+    background: var(--cor-superficie);
     border-radius: 10px;
     padding: var(--espaco-3) var(--espaco-4);
 }
-address p { margin: 0 0 var(--espaco-1); color: var(--cor-neutra-900);}
-address a { color: var(--cor-primaria-escura); font-weight: 600;}
+address p { margin: 0 0 var(--espaco-1); color: var(--cor-texto);}
+address a { color: var(--cor-titulo); font-weight: 600;}
 /* ===== Projetos: categorias de voluntariado - Grid de cards =====*/
 .categorias{
     display: grid;
@@ -176,20 +222,20 @@ address a { color: var(--cor-primaria-escura); font-weight: 600;}
 }
 .categoria {
     grid-column: span 4;
-    background: var(--cor-neutra-100);
+    background: var(--cor-superficie);
     border: 1px solid var(--cor-neutra-300);
     border-radius: 10px;
     padding: var(--espaco-3);
 }
 .categoria h3 {
     font-size:  var(--texto-md);
-    color: var(--cor-primaria-escura);
+    color: var(--cor-titulo);
 }
 .categoria ul {
     margin: 0;
     padding-left: var(--espaco-3);
     font-size: var(--texto-sm);
-    color: var(--cor-neutra-700);
+    color: var(--cor-texto-suave);
 }
 .categoria li { margin-bottom: var(--espaco-1);}
 /*=====Doações - lista em Flexbox ( tags ) =====*/
@@ -217,7 +263,7 @@ form {
     max-width: 600px;
 }
 fieldset {
-    border: 1px solid var(--cor-neutra-300);
+    border: 1px solid var(--cor-neutra-700);
     border-radius: 10px;
     padding: var(--espaco-3);
     display: flex;
@@ -225,7 +271,7 @@ fieldset {
 }
 legend { 
     font-weight: 600;
-    color: var(--cor-primaria-escura);
+    color: var(--cor-titulo);
     padding: 0 var(--espaco-1);
     font-size: var(--texto-sm);
 }
@@ -237,13 +283,13 @@ fieldset label {
 fieldset input {
     margin-top: 0.25rem;
     padding: var(--espaco-1) var(--espaco-2);
-    border: 1px solid var(--cor-neutra-300);
+    border: 1px solid var(--cor-neutra-700);
     border-radius: 6px;
     font-size: var(--texto-sm);
     font-family: inherit;
 }
 fieldset input:focus-visible {
-    outline: 2px solid var(--cor-primaria);
+    outline: 2px solid var(--cor-foco);
     outline-offset: 1px;
 }
 fieldset input,
@@ -277,7 +323,7 @@ form button:hover {
 }
 
 form button:focus-visible {
-    outline: 2px solid var(--cor-primaria);
+    outline: 2px solid var(--cor-foco);
     outline-offset: 2px;
 }
 form button:active {
@@ -306,7 +352,7 @@ form button:disabled {
 }
 .botao:hover { background: var(--cor-secundaria-escura); }
 .botao:focus-visible {
-    outline: 2px solid var(--cor-primaria);
+    outline: 2px solid var(--cor-foco);
     outline-offset: 2px;
 }
 .botao-secundario {
@@ -383,13 +429,13 @@ form button:disabled {
     width: 100%;
     max-width: 480px;
     padding: var(--espaco-4);
-    background: var(--cor-branco);
+    background: var(--cor-fundo-modal);
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 .modal-caixa h2 {
     font-size: var(--texto-md);
-    color: var(--cor-primaria-escura);
+    color: var(--cor-titulo);
 }
 .modal-acoes {
     display: flex;
@@ -413,7 +459,7 @@ fieldset input.campo-erro:user-valid {
 }
 .mensagem-erro {
     display: block;
-    color: var(--cor-erro);
+    color: var(--cor-erro-texto);
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
